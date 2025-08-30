@@ -15,7 +15,9 @@
 - Given the extension runs in VS Code, when a breakpoint is set in PureScript source, then it maps to the correct runtime location.
 - Given an exception is thrown, when stack traces are inspected, then they include original source locations when feasible.
 
-- Given production builds, when source maps are configured, then they exclude inline sources if policy requires, while retaining mapping fidelity for debugging sessions.
+- Given development builds, when running in watch mode, then inline/source maps are enabled for optimal debugging.
+- Given production builds, when source maps are configured, then only external maps are generated (no inline sources) per policy, while retaining mapping fidelity for debugging sessions.
+- Given packaging, when inspecting the `.vsix`, then no `.map` files or `sourceMappingURL` references are present unless explicitly allowed by policy (CI/content check passes).
 
 ## Notes
 - Ensure mappings are included in production/development bundles as appropriate.
@@ -26,6 +28,7 @@
 - Source map generation integrated into build/bundle
 - Minimal debugging guide for setting breakpoints in PureScript
 - Config toggle for dev vs. prod source map behavior
+- `.vscodeignore` entries (and/or packaging rules) to exclude maps from packages
 
 ## Depends On
 - E1-S01 - Scaffold and Build

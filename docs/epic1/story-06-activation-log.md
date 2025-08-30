@@ -14,7 +14,8 @@
 ## Acceptance Criteria
 - Given the extension activates on `.Rmd`, when activation completes, then a one-line message indicates activation success in the output or console.
 
-- Given production builds, when activation occurs, then logging adheres to the chosen policy (e.g., minimal or disabled) while retaining a way to verify activation in development.
+- Given a development build, when the extension activates, then a single line is written to a named VS Code OutputChannel.
+- Given a production build, when the extension activates, then no message is logged by default unless a user setting (e.g., `rmd.activateLog: true`) is enabled.
 
 ## Notes
 - Keep logging minimal to avoid noise; consider dev-only vs. production behavior.
@@ -26,8 +27,10 @@
 - Named Output channel (or console) message on activation
 - Brief verification steps documenting where to see the message
 
+- User setting to enable/disable the activation message in production
+
 ## Depends On
 - E1-S02 - Bundling and Activation
 
 ## Blockers
-- Decision on production logging policy and dev flag naming
+- None

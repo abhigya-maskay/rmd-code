@@ -22,6 +22,8 @@
 
 - Ensure watch works on network filesystems and large workspaces where possible.
 
+- Use `spago build --watch` and `esbuild --watch` in parallel via npm scripts (e.g., `npm-run-all`) with debounce to avoid duplicate rebuilds, per the ADR.
+
 ## Deliverables
 - Cross-platform watch task integrated into npm scripts
 - Incremental build feedback in terminal with clear errors

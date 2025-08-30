@@ -69,11 +69,21 @@
 - Syntax highlighting, language contributions, or LSP features.
 - Knit/preview flows, diagnostics mapping, telemetry, packaging.
 
-## Assumptions & Open Questions
-- Assumption: The exact bundler/tooling choice is flexible - Confidence: medium - Impact: low; multiple tools can satisfy requirements - Validation: pick/tool spike in Epic 1 implementation notes.
-- Assumption: Activation is based on `.Rmd` language or file pattern - Confidence: medium - Impact: medium; incorrect activation harms UX - Validation: verify activation events in package manifest.
-- Open question: Do we require case-insensitive `.rmd` activation on all OSes?
-- Open question: Are there mandated Node/VS Code engine ranges we must pin to for the extension host?
+## Assumptions, Decisions & Open Questions
+- Decision: Bundler is esbuild targeting Node with `external: ['vscode']`; bundle format aligned to packaging (`'cjs'` if no `"type": "module"`).
+- Decision: Hybrid activation - file-pattern now (`workspaceContains:**/*.{Rmd,rmd}`), migrate to `onLanguage:rmd` in a later epic; document case expectations (consider `{Rmd,rmd}`, potentially `.RMD`).
+- Decision: Cross-platform scripts avoid POSIX-only constructs; prefer npm scripts and Node CLIs where needed.
+- Open question: Exact supported `engines.vscode` range and mapped extension host Node major (to finalize pinning/targets).
+ - Decision: Support `engines.vscode` >= `1.99.0`; bundle targets Node 20 for compatibility across the supported range.
+ - Version Pins
+   - VS Code engines: `^1.99.0`
+   - Node target (esbuild): `node20`
+   - esbuild: `0.25.8`
+   - PureScript compiler: `0.15.15`
+   - Spago: `0.21.0`
+   - Package set: `psc-0.15.15-20250827`
+   - @types/vscode (dev): `1.99.0`
+   - @vscode/test-electron (dev): `2.5.2`
 - Dependency note: Spago and PureScript versions must be aligned to avoid FFI breakage.
 
 ## Quality Gates (for Must stories)

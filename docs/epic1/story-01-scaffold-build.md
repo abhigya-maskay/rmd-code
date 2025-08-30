@@ -22,11 +22,25 @@
 ## Notes
 - Targets Node/Electron environment supported by the VS Code extension host.
 
+- esbuild is selected for Node-target bundling per ADR; detailed bundling configuration and activation are finalized under E1-S02.
+
 ## Deliverables
 - Spago project scaffold with PureScript sources
 - Minimal JS FFI stubs and entrypoints
 - Bundler config and build scripts for Node/Electron target
 - Developer docs: build and run commands (docs/build.md or README section)
+
+- engines.vscode pinned and Node target aligned with the VS Code extension host (no manifest warnings)
+
+## Version Pins
+- VS Code engines: ^1.99.0
+- Node target (esbuild): node20
+- esbuild: 0.25.8
+- PureScript compiler: 0.15.15
+- Spago: 0.21.0
+- Package set: psc-0.15.15-20250827
+- @types/vscode (dev): 1.99.0
+- Note: Spago and PureScript versions must be aligned to avoid FFI breakage
 
 ## Depends On
 - None
